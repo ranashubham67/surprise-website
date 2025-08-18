@@ -1,0 +1,443 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Varshita 💖 Birthday Surprise</title>
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins&family=Roboto&family=Pacifico&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #8C68ED;
+      color: #fff;
+      scroll-behavior: smooth;
+    }
+    /* Page 1 styles */
+    .container {
+      max-width: 400px;
+      margin: auto;
+      padding: 15px;
+    }
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      font-size: 18px;
+    }
+    .top-bar .left { font-size: 24px; cursor: pointer; }
+    .profile-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    .profile-pic {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      border: 2px solid #999;
+      object-fit: cover;
+    }
+    .stats {
+      display: flex;
+      justify-content: space-around;
+      flex: 1;
+      margin-left: 20px;
+      font-size: 14px;
+    }
+    .stats div { text-align: center; }
+    .name {
+      font-weight: bold;
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+    .bio {
+      font-size: 14px;
+      line-height: 1.4;
+      margin-bottom: 8px;
+    }
+    .follow-btn {
+      width: 100%;
+      padding: 10px;
+      background-color: #262626;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+    /* Page 2 styles */
+    #page2 {
+      display: none;
+      background: linear-gradient(135deg, #f9d5ec, #c6b4f5);
+      color: #333;
+      padding: 40px 20px;
+      font-family: 'Poppins', sans-serif;
+    }
+    #page2 .container2 {
+      max-width: 700px;
+      margin: auto;
+      background: #ffffffd1;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+    #page2 h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 32px;
+      text-align: center;
+      color: #d63384;
+      margin-bottom: 20px;
+    }
+    .message p {
+      margin-bottom: 15px;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+    .footer { text-align: center; margin-top: 30px; font-size: 14px; color: #555; }
+    .back-btn {
+      display: inline-block;
+      margin-top: 20px;
+      background-color: #8C68ED;
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .back-btn:hover { background-color: #7a5bd4; }
+
+    /* Page 3 styles (game + puzzle) */
+    #page3 {
+      display: none;
+      background: linear-gradient(120deg, #ccefff, #e0f7fa, #f0faff);
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      padding-bottom: 50px;
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.96);
+      padding: 35px 30px;
+      border-radius: 25px;
+      box-shadow: 0 8px 30px rgba(0, 153, 255, 0.2);
+      max-width: 450px;
+      text-align: center;
+      margin: 50px auto 0;
+    }
+    h2 {
+      font-family: 'Pacifico', cursive;
+      font-size: 24px;
+      color: #0077cc;
+      margin-bottom: 20px;
+    }
+    button {
+      padding: 12px 22px;
+      font-size: 16px;
+      margin: 10px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: bold;
+    }
+    .yes-btn {
+      background-color: #0077cc;
+      color: white;
+      box-shadow: 0 5px 15px rgba(0, 153, 255, 0.3);
+    }
+    .no-btn {
+      background-color: #e0f7fa;
+      color: #0077cc;
+      border: 2px solid #0077cc;
+    }
+    .yes-btn:hover { background-color: #005fa3; }
+    .no-btn:hover { background-color: #d0eff9; }
+    .final-msg {
+      font-size: 20px;
+      color: #005fa3;
+      margin-top: 20px;
+      font-family: 'Pacifico', cursive;
+    }
+    .think-again {
+      color: #d9534f;
+      font-weight: bold;
+      margin: 15px 0;
+      font-size: 18px;
+      display: none;
+    }
+    #puzzleSection { display: none; text-align: center; margin-top: 40px; }
+    #puzzle {
+  display: grid;
+  grid-template-columns: repeat(3, 120px);
+  grid-template-rows: repeat(3, 120px);
+  gap: 2px;
+  margin: 20px auto;
+  justify-content: center; /* center horizontally */
+}
+
+.piece {
+  width: 120px;
+  height: 120px;
+  background-image: url('https://i.postimg.cc/zGnmJ6PS/Whats-App-Image-2025-08-12-at-11-21-25-PM.jpg');
+  background-size: 360px 360px;
+  background-repeat: no-repeat;
+}
+
+    #messageBlock {
+      text-align:center;
+      margin-top:20px;
+      display:none;
+      max-width:360px;
+      margin-left:auto;
+      margin-right:auto;
+    }
+    #message {
+      font-size:22px;
+      color: #d63384;
+      margin-bottom:10px;
+    }
+    #extraLine { font-size:16px; color:#444; }
+    .heart {
+      position:absolute;
+      width:30px;
+      height:30px;
+      background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Red_Heart_Emoji.png/600px-Red_Heart_Emoji.png') no-repeat center;
+      background-size: contain;
+      animation: float 4s linear forwards;
+      opacity:0.8;
+    }
+    @keyframes float { to { transform: translateY(-300px) rotate(360deg); opacity:0; } }
+  </style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="container" id="page1">
+  <div class="top-bar">
+    <div class="left">&#8592;</div>
+    <div class="center">varshita_228_</div>
+    <div class="right"><i class="fa-regular fa-bell"></i></div>
+  </div>
+  <div class="profile-header">
+    <img src="https://i.postimg.cc/H8XGn2CM/profile-pic.jpg" alt="Profile Picture" class="profile-pic">
+    <div class="stats">
+      <div><strong>1</strong><br>Posts</div>
+      <div><strong>228</strong><br>Followers</div>
+      <div><strong>219</strong><br>Following</div>
+    </div>
+  </div>
+  <div class="name">Varshita ❤️ My Everything🤍🕊️</div>
+  <div class="bio">
+    <br>
+    :-🎂 Happy Birthday My Angel 💖<br>
+    :- 👑 You shine even brighter than the moon 🌙 <br>
+    :-💌 You entered my life from Instagram & became everything...<br>  
+  </div>
+  <button class="follow-btn" onclick="showPage2()">Follow</button>
+</div>
+
+<!-- PAGE 2 -->
+<div id="page2">
+  <div class="container2">
+    <h1>Happy Birthday My Love 💌</h1>
+    <div class="message">
+      <!-- Birthday message content -->
+      <p>Hey!! Main hoon tumhara Shubhu... 😊</p>
+      <p>Aaj se 414 days pehle — 20 August 2024 — humne pehli baar baat ki thi… 😺🩷</p>
+      <p>Aur aaj — 8 October 2025 — tumhara birthday hai... meri future wifey ka birthday 🥳😌❤️</p>
+      <p>Laxmi ji hai meri 💝🥹</p>
+      <p>Us din maine tumhari sadi wali story ko "perfect" bola tha 😻, par mujhe kya pata tha ki ek din tum meri life ki perfect story ban jaogi 🤗.</p>
+      <p>Starting mein toh bas normal baatein hoti thi, thoda fun, thodi smile… 🧡 But dheere-dheere kuch change hone laga — dil judne laga, baaton mein depth aayi.</p>
+      <p>Pehle laga sirf attraction hoga 😀, par fir samajh aaya — jis ladki se sirf 2–3 baar mila hoon, usse itna attach hona... ye sirf attraction nahi ho sakta. Ye kuch aur hai… ye real love hai 🥹😘</p>
+      <p>Main bhi sure nahi tha, lekin jab maine tumhe mere saath genuinely happy dekha 😚 toh meri duniya bhi khush hone lagi 🤗</p>
+      <p>Tumhari wo smile 😊, tumhara cute sa gussa, har message mein wo warmth 😌 — sab kuch slowly addictive ban gaya... 😋</p>
+      <p>Varshu... mujhe hamari poori love story yaad hai — wo first baat 😇, wo Garba night 🥰💃, tumhari aankhon ka noor 🩵, aur uske baad jo feelings aayi... unhone meri duniya hi badal di 🥰</p>
+      <p>Haan, tum thoda kalesh karti ho 😄, par sach kahu toh tumhara gussa bhi mujhe pyaara lagta hai 😌 — kyuki usmein bhi tumhara hakk hota hai mujhpar ❤️</p>
+      <p>Kabhi kabhi sochta hoon… ☺️ itni loyal, samajhdar, pyaari ladki — woh bhi meri? 😯😊 Tumhari loyalty toh meri RCB wali loyalty se bhi strong hai 😄❤️</p>
+      <p>Main bas yeh pray karta hoon — ki hum kabhi alag na ho, aur hamara bond ek pyare se husband-wife ke relation mein convert ho jaye 🫂🫀</p>
+      <p>Sach mein bacchha 🥹, I’m so blessed ki mujhe tum jaisi wifey mili 💝 Bohot saare sapne dekhe hain humne 🥹 Mujhe sirf tumhara saath chahiye 🫴😻</p>
+      <p>Bas sab kuch ho kar rahega 😊 Tum kabhi chod ke mat jaana babu 😔🤍</p>
+      <p>Agar main kabhi gusse mein bol du — “Chhod do mujhe, mujhe nahi chahiye tumhara saath...” toh ek kaam karna — zor se ek thappad lagana 🥲😊 aur hug kar lena 🫂 Shayad tab mujhe tumhari sabse zyada zarurat hogi 🤗</p>
+      <p>🎂 Happy Birthday meri rasmalay...meri puranpuri...mere bachoo ki maa! ❤️ Tumhara har sapna poora ho, aur tum har saal meri zindagi ka sabse pyaara hissa bani raho 😊</p>
+    </div>
+    <div class="footer">
+      — Your Love, Shubhu 💍❤️<br>
+      <button class="back-btn" onclick="showPage3()">Sign Love Contract ✍️❤️</button>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 3 -->
+<div id="page3">
+  <div class="card" id="gameCard">
+    <h2 id="question">Loading...</h2>
+    <div class="think-again" id="thinkMsg">Think Again, My Love 🥺💔</div>
+    <div id="buttons">
+      <button class="yes-btn" onclick="handleAnswer(true)">Yes</button>
+      <button class="no-btn" onclick="handleAnswer(false)">No</button>
+    </div>
+    <div class="final-msg" id="final"></div>
+  </div>
+
+  <!-- Puzzle Section -->
+  <div id="puzzleSection">
+    <h2 style="color:#0077cc;">Final Surprise Puzzle 🧩❤️</h2>
+    <div id="puzzle"></div>
+    <div id="messageBlock">
+      <div id="message">Yehhhh! You’ve completed our love puzzle ❤️ Forever together!</div>
+      <div id="extraLine">Very good, my girl! ❤️ This is our first birthday picture together — back then we were just best friends, and today we are the best for each other 🫂🫀.</div>
+      <br>
+<button class="yes-btn" onclick="playFinalSurprise()">🎁 Click for Final Surprise</button>
+
+<div id="finalVideo" style="display:none; text-align:center; margin-top:20px;">
+  <video id="surpriseVideo" width="360" controls autoplay>
+    <source src="assets/birthday.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+</div>
+
+
+
+      <div id="finalVideo" style="display:none; text-align:center; margin-top:20px;">
+        <iframe src="https://drive.google.com/file/d/1FV7RcoceyDt3EPPLs2DNlCkOX4VVbFDN/preview"
+          width="360" height="215" allow="autoplay"></iframe>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function showPage2() {
+    document.getElementById('page1').style.display = 'none';
+    document.getElementById('page2').style.display = 'block';
+    window.scrollTo(0, 0);
+  }
+  function showPage3() {
+    document.getElementById('page2').style.display = 'none';
+    document.getElementById('page3').style.display = 'block';
+    window.scrollTo(0, 0);
+    showQuestion();
+  }
+
+  /* Game Logic */
+  const questions = [
+    "1. Kya Varshu ji aap mere ho? 💙",
+    "2. Kya aap har kalesh ke baad sabse pehle hug dogi? 🤗",
+    "3. Kya aap future mein sirf meri hi wifey banogi? 👰💍",
+    "4. Kya aap roz at least ek Baar 'I love you' bologe? 💌",
+    "5. Final promise — Kya aap mere sath forever rahoge? ♾️💙"
+  ];
+  let current = 0;
+  const questionEl = document.getElementById("question");
+  const finalMsg = document.getElementById("final");
+  const thinkMsg = document.getElementById("thinkMsg");
+
+  function showQuestion() {
+    questionEl.innerText = questions[current];
+    thinkMsg.style.display = "none";
+  }
+  function handleAnswer(isYes) {
+    if (!isYes) {
+      thinkMsg.style.display = "block";
+      return;
+    }
+    current++;
+    if (current < questions.length) {
+      showQuestion();
+    } else {
+      questionEl.style.display = "none";
+      document.getElementById("buttons").style.display = "none";
+      thinkMsg.style.display = "none";
+      finalMsg.innerHTML = `💍 Contract Signed 💖<br>
+      Now you're officially mine forever, Varshu 🥹✨<br>❤️
+      <br><br>
+      <button class="yes-btn" onclick="startPuzzle()">Go to Final Surprise Puzzle 🧩❤️</button>`;
+    }
+  }
+
+  /* Puzzle Logic */
+  function startPuzzle(){
+    document.getElementById("gameCard").style.display = "none";
+    document.getElementById("puzzleSection").style.display = "block";
+    createPuzzle();
+  }
+  function createPuzzle(){
+    const PUZZLE_SIZE = 3;
+    const puzzle = document.getElementById('puzzle');
+    let pieces = [];
+    for(let r=0; r<PUZZLE_SIZE; r++){
+      for(let c=0; c<PUZZLE_SIZE; c++){
+        pieces.push({r, c});
+      }
+    }
+    function shuffle(array){
+      for(let i=array.length-1;i>0;i--){
+        const j = Math.floor(Math.random()*(i+1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+    }
+    shuffle(pieces);
+    pieces.forEach(pos => {
+      const piece = document.createElement('div');
+      piece.className = 'piece';
+      piece.style.backgroundPosition = `${-pos.c * 120}px ${-pos.r * 120}px`;
+      piece.draggable = true;
+      piece.dataset.correct = `${pos.r},${pos.c}`;
+      piece.addEventListener('dragstart', dragStart);
+      piece.addEventListener('dragover', e => e.preventDefault());
+      piece.addEventListener('drop', drop);
+      puzzle.appendChild(piece);
+    });
+  }
+  let dragSrc = null;
+  function dragStart(){ dragSrc = this; }
+  function drop(){
+    if(dragSrc === this) return;
+    let tempBG = dragSrc.style.backgroundPosition;
+    let tempCorrect = dragSrc.dataset.correct;
+    dragSrc.style.backgroundPosition = this.style.backgroundPosition;
+    dragSrc.dataset.correct = this.dataset.correct;
+    this.style.backgroundPosition = tempBG;
+    this.dataset.correct = tempCorrect;
+    checkComplete();
+  }
+  function checkComplete(){
+    const PUZZLE_SIZE = 3;
+    const allPieces = document.querySelectorAll('.piece');
+    let correctCount = 0;
+    allPieces.forEach((p, i) => {
+      const row = Math.floor(i / PUZZLE_SIZE);
+      const col = i % PUZZLE_SIZE;
+      if(p.dataset.correct === `${row},${col}`) correctCount++;
+    });
+    if(correctCount === PUZZLE_SIZE * PUZZLE_SIZE){
+      document.getElementById('messageBlock').style.display = 'block';
+      launchHearts();
+    }
+  }
+  function playFinalSurprise(){
+    document.getElementById('messageBlock').style.display = 'none';
+    document.getElementById('finalVideo').style.display = 'block';
+  }
+  function launchHearts(){
+    for(let i=0;i<20;i++){
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.style.left = Math.random() * window.innerWidth + 'px';
+      heart.style.top = window.innerHeight + 'px';
+      document.body.appendChild(heart);
+      heart.addEventListener('animationend', () => heart.remove());
+    }
+  }
+</script>
+
+</body>
+</html>
